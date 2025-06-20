@@ -11,8 +11,7 @@ See the robot in action! Click the image below to watch the full mission on YouT
 
 [![EV3 Autonomous Robot Video](https://img.youtube.com/vi/F8zVAMhfwYk/0.jpg)](https://www.youtube.com/watch?v=F8zVAMhfwYk)
 
-> **Note:** Replace `YOUTUBE_VIDEO_ID` in the link above with your actual YouTube video ID.
-> (e.g., for a video at `https://www.youtube.com/watch?v=abcdef123`, the ID is `abcdef123`.)
+
 
 ## 🎯 Project Goals and Features
 
