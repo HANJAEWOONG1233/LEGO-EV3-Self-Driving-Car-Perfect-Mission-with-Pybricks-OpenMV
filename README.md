@@ -143,6 +143,49 @@ This custom P-control method is a core technology of the project, delivering fas
 
 ---
 
+
+## 🚦 Technical Deep Dive: Traffic Light Recognition with OpenMV & Edge Impulse
+
+The robot's ability to wait for a traffic light is powered by a machine learning model running on the OpenMV camera. This model is trained to classify images as "red" or "green" in real-time. Here’s a summary of the workflow:
+
+1.  **Data Collection:** Use OpenMV to capture images of red and green signals.
+2.  **Model Training:** Use the free, web-based [Edge Impulse](https://studio.edgeimpulse.com/) platform to train a neural network.
+3.  **Deployment:** Deploy the trained model (`.tflite` file) back to the OpenMV.
+4.  **Integration:** The OpenMV sends the classification result ("one" for red, "two" for green) to the EV3 via UART.
+
+<details>
+<summary><strong>▶️ Click for a Step-by-Step Guide to Training Your Own Model</strong></summary>
+
+### 1. Data Collection (OpenMV)
+1.  **Setup**: In the OpenMV IDE, go to `Tools` -> `Dataset Editor` -> `New Dataset` to create a project folder.
+2.  **Create Classes**: In the Dataset Editor, click the "New Class Folder" icon and create a class named `one` (for red light). Repeat for a class named `two` (for green light).
+3.  **Capture Images**:
+    *   Click the "play" button to start the camera preview.
+    *   Point the camera at a **red light**.
+    *   Click the "capture" icon multiple times to save images to the `one` class folder.
+    *   Repeat the process for the `two` class, pointing the camera at a **green light**.
+
+### 2. Model Training (Edge Impulse)
+1.  **Upload Data**: In your Edge Impulse project, go to `Data acquisition`. Upload the images from your `one` folder, setting the label to `one`. Repeat for the `two` folder, setting the label to `two`.
+    > **IMPORTANT**: If a popup asks `Are you building an object detection project?`, select **NO**. This is an image **classification** project.
+2.  **Create Impulse**:
+    *   Go to `Create impulse`.
+    *   Set the image size to `48x48`.
+    *   Add an `Image` processing block and a `Classification` learning block.
+    *   Save the impulse.
+3.  **Generate Features & Train**:
+    *   Under `Image`, click `Generate features`.
+    *   Under `Classifier`, click `Start training`.
+
+### 3. Deployment
+1.  **Build Model**: Go to the `Deployment` tab.
+2.  **Select Library**: Search for and select **OpenMV Library**.
+3.  **Download**: Click `Build`. A `.zip` file containing `trained.tflite` and `labels.txt` will be downloaded.
+4.  **Copy to OpenMV**: Connect your OpenMV to your PC. It will appear as a USB drive. Copy `trained.tflite` and `labels.txt` to the root of this drive.
+5.  **Load Code**: Save the provided OpenMV script as `main.py` on the OpenMV drive. This script will load the model, classify images, and send the results (`one` or `two`) over UART.
+
+---
+
 ## ⚙️ Configuration and Tuning Guide
 
 The robot's performance can vary depending on environmental factors like track conditions and ambient lighting. You can optimize the robot by modifying the constants defined in the **configuration section** at the top of the code.
