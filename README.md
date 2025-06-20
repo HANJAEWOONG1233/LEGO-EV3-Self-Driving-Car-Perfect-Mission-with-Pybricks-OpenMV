@@ -9,7 +9,7 @@ This project is an advanced autonomous driving robot built with LEGO Mindstorms 
 
 See the robot in action! Click the image below to watch the full mission on YouTube.
 
-[[![EV3 Autonomous Robot Video](https://youtu.be/F8zVAMhfwYk)
+[[[![EV3 Autonomous Robot Video](https://youtu.be/F8zVAMhfwYk)](https://youtu.be/F8zVAMhfwYk)
 
 > **Note:** Replace `YOUTUBE_VIDEO_ID` in the link above with your actual YouTube video ID.
 > (e.g., for a video at `https://www.youtube.com/watch?v=abcdef123`, the ID is `abcdef123`.)
